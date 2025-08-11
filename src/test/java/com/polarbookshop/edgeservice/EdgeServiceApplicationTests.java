@@ -2,12 +2,12 @@ package com.polarbookshop.edgeservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 
+@Import(TestcontainersConfiguration.class)
 @SpringBootTest
 class EdgeServiceApplicationTests {
 
   @Test
-  void contextLoads() {
-  }
-
+  void contextLoads() {}
 }
