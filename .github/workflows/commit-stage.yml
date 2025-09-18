@@ -25,7 +25,7 @@ jobs:
       - name: Build, unit and integration tests
         run: |
           chmod +x gradlew
-          ./gradlew build --no-daemon
+          ./gradlew build -i --stacktrace --no-daemon
       - name: Code vulnerability scan
         uses: anchore/scan-action@v6
         id: scan
