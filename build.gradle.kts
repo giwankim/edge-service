@@ -1,14 +1,9 @@
 import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
-    // java
-    java
-    id("com.diffplug.spotless") version "7.2.1"
-
-    // kotlin
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
-    id("org.springframework.boot") version "3.5.5"
+    id("org.springframework.boot") version "3.5.6"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
 }
@@ -20,13 +15,6 @@ description = "Provides API gateway and cross-cutting concerns."
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
-// java
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
     }
 }
 
@@ -48,17 +36,8 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux")
     implementation("org.springframework.session:spring-session-data-redis")
     implementation("org.springframework.retry:spring-retry")
-
-    // java
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
-
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-    runtimeOnly("io.netty:netty-resolver-dns-native-macos") {
-        artifact {
-            classifier = "osx-aarch_64"
-        }
-    }
+    runtimeOnly("io.netty:netty-resolver-dns-native-macos::osx-aarch_64")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(module = "mockito-core")
     }
@@ -86,7 +65,7 @@ kotlin {
 
 tasks.named<BootBuildImage>("bootBuildImage") {
     imageName.set(project.name)
-    environment.put("BP_JVM_VERSION", "24")
+    environment.put("BP_JVM_VERSION", "21")
 
     docker {
         publishRegistry {
@@ -99,11 +78,4 @@ tasks.named<BootBuildImage>("bootBuildImage") {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-}
-
-// java
-spotless {
-    java {
-        googleJavaFormat().reorderImports(true)
-    }
 }
