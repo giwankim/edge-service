@@ -14,7 +14,7 @@ class WebEndpoints {
     fun routerFunction(): RouterFunction<ServerResponse> =
         RouterFunctions
             .route()
-            .GET("catalog-fallback") {
+            .GET("/catalog-fallback") {
                 ServerResponse.ok().body(Mono.just(""), String::class.java)
             }.POST("/catalog-fallback") {
                 ServerResponse.status(HttpStatus.SERVICE_UNAVAILABLE).build()

@@ -24,13 +24,15 @@ spring:
         initial-interval: 1000
         max-interval: 2000
         multiplier: 1.1
-    # API Gateway
+    # API gateway
     gateway:
       server:
         webflux:
+          # HTTP timeouts configuration
           httpclient:
             connect-timeout: 2000
             response-timeout: 5s
+            # Netty connection pool
             pool:
               type: elastic
               max-idle-time: 15s
@@ -54,6 +56,9 @@ spring:
                   maxBackOff: 500ms
                   factor: 2
                   basedOnPreviousValue: false
+                jitter:
+                  randomFactor: 0.5
+          # routes
           routes:
             - id: catalog-route
               uri: ${CATALOG_SERVICE_URL:http://localhost:9001}/books
