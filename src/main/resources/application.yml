@@ -10,7 +10,7 @@ spring:
     name: edge-service
   lifecycle:
     timeout-per-shutdown-phase: 15s
-  #  config server
+  #  Config server
   config:
     import: "optional:configserver:"
   cloud:
@@ -58,7 +58,7 @@ spring:
                   basedOnPreviousValue: false
                 jitter:
                   randomFactor: 0.5
-          # routes
+          # Routes
           routes:
             - id: catalog-route
               uri: ${CATALOG_SERVICE_URL:http://localhost:9001}/books
