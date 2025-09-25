@@ -16,6 +16,6 @@ class SecurityConfig {
             authorizeExchange {
                 authorize(anyExchange, authenticated)
             }
-            formLogin { }
+            oauth2Login { }
         }
 }

@@ -10,7 +10,7 @@ spring:
     name: edge-service
   lifecycle:
     timeout-per-shutdown-phase: 15s
-  #  Config server
+  # Config server
   config:
     import: "optional:configserver:"
   cloud:
@@ -77,7 +77,7 @@ spring:
                 - name: CircuitBreaker
                   args:
                     name: orderCircuitBreaker
-  #  Redis session store
+  # Redis session store
   data:
     redis:
       connect-timeout: 2s
@@ -88,6 +88,7 @@ spring:
     timeout: 10m
     redis:
       namespace: polar:edge
+  # Keycloak configuration
   security:
     oauth2:
       client:

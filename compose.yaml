@@ -3,3 +3,14 @@ services:
     image: redis:8.2.1
     ports:
       - "6379:6379"
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.3.4
+    command: start-dev --import-realm
+    volumes:
+      - ./realm-config.json:/opt/keycloak/data/import/realm-config.json
+    environment:
+      - KEYCLOAK_ADMIN=user
+      - KEYCLOAK_ADMIN_PASSWORD=password
+    ports:
+      - "8080:8080"
